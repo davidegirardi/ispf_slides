@@ -5,11 +5,17 @@
         <meta charset="utf-8"/>
         <title>Slide</title>
         <style>
+            @font-face {
+                font-family: font3270;
+                src: url("fonts/3270-Regular.woff");
+            }
 
+            /*
             body {
                 font-family: monospace;
                 font-size: 16px;
             }
+            */
 
             #terminal {
                 margin: 0;
@@ -17,9 +23,9 @@
                 box-sizing: border-box;
                 background-color: black;
                 font-style:normal;
-                /*font-family: monospace;*/
+                font-family: font3270;
                 font-size-adjust: 0;
-                width: 90em;
+                width: 180ex;
             }
 
             #top-of-data {
@@ -32,12 +38,11 @@
 
             #line-numbers {
                 float: left;
-                width: 8em;
             }
 
             #slide-text {
                 float: right;
-                width: 82em;
+                width: auto;
             }
 
             .underline {
@@ -52,7 +57,6 @@
             .menu-separator {
                 overflow: hidden;
                 color: #00bfff;
-                font-weight:bold;
             }
 
             .menu-bar {
@@ -90,7 +94,7 @@
 
         <div id="terminal">
 
-            <div class="ispf-element menu-bar">  File  Edit  Edit_Settings  Menu  Utilities  Compilers  Test  Help</div>
+            <div class="ispf-element menu-bar">  <span class="underline">F</span>ile  <span class="underline">E</span>dit  E<span class="underline">d</span>it_Settings  <span class="underline">M</span>enu  <span class="underline">U</span>tilities  <span class="underline">C</span>ompilers  <span class="underline">T</span>est  <span class="underline">H</span>elp</div>
 
             <div class="ispf-element blue-text menu-separator">───────────────────────────────────────────────────────────────────────────────</div>
 
@@ -165,7 +169,7 @@
                     </div>
                 </div>
                 <div id="slide-text">
-                    <span class="ispf-element green-text">test test </span><br />
+                    <span class="ispf-element green-text">123456789012345678901234567890123456789012345678901234567890123456789012</span><br />
                     <span class="ispf-element green-text">MMMM test </span><br />
                     <span class="ispf-element green-text">test test </span><br />
                     <span class="ispf-element green-text">test test </span><br />

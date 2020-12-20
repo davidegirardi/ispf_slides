@@ -10,74 +10,162 @@
                 src: url("fonts/3270-Regular.woff");
             }
 
-            /*
-            body {
-                font-family: monospace;
-                font-size: 16px;
-            }
-            */
-
             #terminal {
                 background-color: black;
                 font-style:normal;
                 font-family: font3270;
-                /* This is an hack to not have newliens o
-                 * I can probably move everyting to a grid layout instead
-                 * It would help with the viariable title name maybe
-                 */
-                font-size-adjust: 0;
+                display: grid;
+                grid-template-columns: repeat(80, 1ch);
+                /* Needed for grid spacing */
+                font-size-adjust: 1;
+                grid-column-gap: 0;
+                grid-row-gap: 0;
             }
 
             #slide-body {
                 display: grid;
-                grid-template-columns: repeat(80, 1ch);
-                font-size-adjust: 1;
+                grid-template-columns: subgrid;
                 /* todo
                 grid-template-rows: repeat(19, 1/19);
                 */
                 grid-column-gap: 0;
                 grid-row-gap: 0;
+                grid-column: 1/80;
+                grid-row: 5;
+                padding-left: 1ch;
             }
 
             #top-of-data {
                 display: none;
-                grid-column: 1/80;
+                grid-column: 2/80;
                 grid-row: 1;
                 background: black;
             }
 
             #bottom-of-data {
                 display: none;
-                grid-column: 1/80;
+                grid-column: 2/80;
                 grid-row: 19;
             }
 
             #line-numbers {
-                grid-column: 1/6;
-                grid-row: 1/19;
+                grid-column: 2/8;
+                grid-row: 1;
             }
 
             #slide-text {
                 grid-column: 8/80;
                 grid-row: 1/19;
+                padding-left: 1ch;
             }
 
             .underline {
                 text-decoration: underline;
                 text-decoration-color: #40e0d0;
             }
+
             .ispf-element {
-                white-space: pre;
-                font-size-adjust: 1;
             }
 
-            .menu-separator {
-                color: #00bfff;
-            }
-
-            .menu-bar {
+            #menu-bar {
                 color: white;
-                font-weight:bold;
+                grid-row: 1;
+                grid-column: 1/80;
+                display: grid;
+                grid-template-columns: subgrid;
+                padding-left: 1ch;
+            }
+
+            #menu-file {
+                grid-column: 4;
+            }
+            
+            #menu-edit {
+                grid-column: 10;
+            }
+            
+            #menu-edit-settings {
+                grid-column: 16;
+            }
+            
+            #menu-menu {
+                grid-column: 31;
+            }
+            
+            #menu-utilities {
+                grid-column: 37;
+            }
+            
+            #menu-compilers {
+                grid-column: 48;
+            }
+            
+            #menu-test {
+                grid-column: 59;
+            }
+            
+            #menu-help {
+                grid-column: 65;
+            }
+            
+            #menu-separator {
+                color: #00bfff;
+                grid-row: 2;
+                grid-column: 1/80;
+                padding-left: 1ch;
+            }
+
+            #status-line {
+                grid-row: 3;
+                grid-column: 1/80;
+                display: grid;
+                grid-template-columns: subgrid;
+                padding-left: 1ch;
+            }
+
+            #status-line-mode {
+                grid-column: 2;
+            }
+
+            #status-line-name {
+                grid-column: 13/60;
+            }
+
+            #status-line-columns {
+                grid-column: 61/69;
+            }
+
+            #status-line-column-numbers {
+                grid-column: 69/80;
+            }
+
+            #command-line {
+                grid-row: 4;
+                grid-column: 1/80;
+                display: grid;
+                grid-template-columns: subgrid;
+                padding-left: 1ch;
+            }
+
+            #command-line-command {
+                grid-column: 2/14;
+            }
+
+            #command-line-spaces {
+                grid-column: 15/64;
+            }
+
+            #command-line-scroll {
+                grid-column: 64/75;
+            }
+
+            #command-line-scroll-type {
+                grid-column: 76/79;
+            }
+
+            #f-keys {
+                grid-row: 24;
+                grid-column: 2/80;
             }
 
             .blue-text {
@@ -100,6 +188,10 @@
                 color: #ff0000;
             }
 
+            .white-space-pre {
+                white-space: pre;
+            }
+
         </style>
     </head>
 
@@ -110,30 +202,66 @@
 
         <div id="terminal">
 
-            <div class="ispf-element menu-bar">  <span class="underline">F</span>ile  <span class="underline">E</span>dit  E<span class="underline">d</span>it_Settings  <span class="underline">M</span>enu  <span class="underline">U</span>tilities  <span class="underline">C</span>ompilers  <span class="underline">T</span>est  <span class="underline">H</span>elp</div>
-
-            <div class="ispf-element blue-text menu-separator">───────────────────────────────────────────────────────────────────────────────</div>
-
-            <div>
-                <span class="ispf-element turquoise-text">EDIT       </span>
-                <span id="presentation-name" class="ispf-element turquoise-text">NOGONOSA.SLIDES(DEMO1) - 01.00                 </span>
-                <span class="ispf-element green-text"> Columns</span>
-                <span class="ispf-element turquoise-text"> 00001 00072</span>
+            <div id="menu-bar">
+                <div id="menu-file">
+                    <span class="underline">F</span>ile
+                </div>
+                <div id="menu-edit">
+                    <span class="underline">E</span>dit
+                </div>
+                <div id="menu-edit-settings">
+                    E<span class="underline">d</span>it_Settings
+                </div>
+                <div id="menu-menu">
+                    <span class="underline">M</span>enu
+                </div>
+                <div id="menu-utilities">
+                    <span class="underline">U</span>tilities
+                </div>
+                <div id="menu-compilers">
+                    <span class="underline">C</span>ompilers
+                </div>
+                <div id="menu-test">
+                    <span class="underline">T</span>est
+                </div>
+                <div id="menu-help">
+                    <span class="underline">H</span>elp
+                </div>
             </div>
 
-            <div>
-                <span class="ispf-element green-text">Command ===&gt; </span>
-                <span class="ispf-element turquoise-text underline">                                                 </span>
-                <span class="ispf-element green-text"> Scroll ===&gt; </span><span class="ispf-element turquoise-text underline">CSR </span>
+            <div id="menu-separator" class="blue-text">───────────────────────────────────────────────────────────────────────────────</div>
+
+            <div id="status-line">
+                <div id="status-line-mode">
+                    <span class="turquoise-text">EDIT</span>
+                </div>
+                <div id="status-line-name">
+                    <span id="presentation-name" class="turquoise-text">NOGONOSA.SLIDES(DEMO1) - 01.00</span>
+                </div>
+                <div id="status-line-columns">
+                    <span class="ispf-element green-text">Columns</span>
+                </div>
+                <div id="status-line-column-numbers">
+                    <span class="ispf-element turquoise-text">00001 00072</span>
+                </div>
+            </div>
+
+            <div id="command-line">
+                <div id="command-line-command">
+                    <span class="ispf-element green-text">Command ===&gt;</span>
+                </div>
+                <div id="command-line-spaces">
+                    <span class="ispf-element turquoise-text underline white-space-pre">                                                </span>
+                </div>
+                <div id="command-line-scroll">
+                    <span class="ispf-element green-text"> Scroll ===&gt;</span>
+                </div>
+                <div id="command-line-scroll-type">
+                    <span class="ispf-element turquoise-text underline white-space-pre">CSR </span>
+                </div>
             </div>
 
             <div id="slide-body">
-
-                <div id="top-of-data">
-                    <!-- Top of data line -->
-                    <span class="ispf-element red-text">****** </span>
-                    <span class="ispf-element blue-text">***************************** Top of Data ******************************</span>
-                </div>
 
                 <div id="line-numbers">
                     <div>
@@ -186,22 +314,14 @@
                     </div>
                 </div>
                 <div id="slide-text">
-                    <span class="ispf-element green-text">123456789012345678901234567890123456789012345678901234567890123456789012</span><br />
-                    <span class="ispf-element green-text">MMMM test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
-                    <span class="ispf-element green-text">test test </span><br />
+                    <span class="ispf-element green-text">Some test </span><br />
+                    <span class="ispf-element green-text">AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</span><br />
+                </div>
+
+                <div id="top-of-data">
+                    <!-- Top of data line -->
+                    <span class="ispf-element red-text">****** </span>
+                    <span class="ispf-element blue-text">***************************** Top of Data ******************************</span>
                 </div>
 
                 <div id="bottom-of-data">
@@ -212,7 +332,7 @@
 
             </div>
 
-            <div>
+            <div id="f-keys">
                 <span class="ispf-element blue-text"> F1=Help      F3=Exit      F4=Expand    F5=Rfind     F6=Rchange  F12=Cancel</span>
             </div>
 
